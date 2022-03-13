@@ -5,10 +5,24 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 const { log } = labeledLogger();
 
 /**
+ * Fetches user by id and resolves in user contact info.
  *
  * @async
+ * @param {number} [id=1] - The user id to fetch.
+ * @returns {Promise<array>} A prromise that resolves to user's contact info (email, phone number and website) in an arrray of strings.
+ *
+ * @throws {Error} {status number}: {status text}
  */
-const contactInfo = async () => {};
+
+const contactInfo = async (id=1) => {
+  const responsePromise = await fetchUserById(id);
+  if(!responsePromise.ok) {
+    throw new Error(`${responsePromise.status}: ${responsePromise.statusText}`)
+  }
+  const user = await responsePromise.json();
+  return [user.email, user.phone, user.website];
+
+};
 
 describe("contactInfo returns a specific user's contact info", () => {
   it("gets user 3's info", async () => {

@@ -3,7 +3,38 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 /**
  *
  */
-const findGeoCoordinates = async (ids = []) => {};
+const findGeoCoordinates = async (ids = []) => {
+  // debugger;
+  const responsePromises = [];
+  ids.forEach((id) => responsePromises.push(fetchUserById(id)));
+  const responses = await Promise.all(responsePromises);
+  responses.forEach((res) => {
+    if (!res.ok) {
+      throw new Error(`${res.status}: ${res.statusText}`);
+    }
+  });
+  const userPromises = responses.map((res) => res.json());
+  const users = await Promise.all(userPromises);
+  // way 1: create an empty array
+  // const geoCoordinates = [];
+  // users.map((user) => {
+  //     geoCoordinates.push(user.address.geo);
+
+  // });
+  // return geoCoordinates;
+
+  // way 2: create an object use ({...})
+  // return users.map((user) => ({lat: user.address.geo.lat, lng: user.address.geo.lng}));
+
+  // way 3: copy an object using spread ...
+  // return users.map(user => ({...user.address.geo}));
+
+  // way 4: copy an object using  Object.assign() method
+  // return users.map(user => Object.assign({}, user.address.geo));
+
+  // way 5: copy an object using JSON
+  return users.map(user => JSON.parse(JSON.stringify(user.address.geo)))
+};
 
 // --- --- tests --- ---
 

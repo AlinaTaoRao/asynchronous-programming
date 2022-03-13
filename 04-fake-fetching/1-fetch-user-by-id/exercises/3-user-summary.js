@@ -16,6 +16,11 @@ const handleResponse = (res) => {
 
 const createSummary = (user) => {
   // write me!
+  const infoObj = {};
+  infoObj.name = user.name;
+  infoObj.city = user.address.city;
+  infoObj.companyName = user.company.name;
+  return infoObj;
 };
 
 const handleError = (err) => error(err);
@@ -23,31 +28,47 @@ const handleError = (err) => error(err);
 // --- use the callbacks ---
 
 log('fetching and processing user 5');
-/*  {
+fetchUserById(5)
+  .then(handleResponse)
+  .then(createSummary)
+  /*  {
       name: 'Chelsey Dietrich',
       city: 'Roscoeview',
       companyName: 'Keebler LLC'
     } */
-__;
+  .then((infoObj) => log(infoObj))
+  .catch(handleError);
 
 log('fetching and processing user 1');
+fetchUserById(1)
+  .then(handleResponse)
+  .then(createSummary)
 /*  {
       name: 'Leanne Graham',
       city: 'Gwenborough',
       companyName: 'Romaguera-Crona',
     } */
-__;
+  .then((infoObj) => log(infoObj))
+  .catch(handleError);
 
 log('fetching and processing user 10');
+fetchUserById(10)
+  .then(handleResponse)
+  .then(createSummary)
 /*  {
       name: 'Clementina DuBuque',
       city: 'Lebsackbury',
       companyName: 'Hoeger LLC',
     } */
-__;
+  .then((infoObj) => log(infoObj))
+  .catch(handleError);
 
 log('fetching and processing user -1');
+fetchUserById(-1)
+  .then(handleResponse)
+  .then(createSummary)
 // 404
-__;
+  .then((infoObj) => log(infoObj))
+  .catch(handleError);
 
 log('= = = =  the call stack is empty  = = = =');

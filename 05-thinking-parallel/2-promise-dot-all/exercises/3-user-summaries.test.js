@@ -5,7 +5,27 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 /**
  *
  */
-const createSummaries = async (ids = []) => {};
+const createSummaries = async (ids = []) => {
+  const responsePromises = [];
+  ids.map((id) => responsePromises.push(fetchUserById(id)));
+  const responses = await Promise.all(responsePromises);
+  responses.map((res) => {
+    if (!res.ok) {
+      throw new Error(`${res.status} : ${res.statusText}`);
+    }
+  });
+  const userPromises = responses.map((res) => res.json());
+  const users = await Promise.all(userPromises);
+  const summaries = [];
+  users.map((user) =>
+    summaries.push({
+      name: user.name,
+      city: user.address.city,
+      companyName: user.company.name,
+    }),
+  );
+  return summaries;
+};
 
 // --- --- tests --- ---
 
