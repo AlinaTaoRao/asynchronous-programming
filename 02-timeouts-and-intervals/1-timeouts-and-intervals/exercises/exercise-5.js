@@ -6,7 +6,15 @@ const { log } = labeledLogger();
 const sortArray = (unsorted, sorted) => {
   // iterate through each item in the unsorted array
   //  for each item creat a timeout
-  //    in the timeout callback, push the item into `sorted`
+  // setTimeout(callback1, 3000);
+  // in the timeout callback, push the item into `sorted`
+  const callback1 = (ele) => {
+    console.log("my: ", ele.charCodeAt(unsorted));
+    sorted.push(ele);
+  };
+  unsorted.forEach( ele => setTimeout(callback1, ele.charCodeAt(unsorted), ele));
+  
+  
   //    the timeout should delay for item.charCodeAt()
 };
 

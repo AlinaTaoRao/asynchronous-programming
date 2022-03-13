@@ -5,10 +5,24 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 const { log } = labeledLogger();
 
 /**
+ * Fetches user by id and returns promise of username and email.
  *
  * @async
+ * @param {number} [id=1] - The user ID to fetch.
+ * @returns {Promise<string>} A promise that resolves to the user's
+ * id, username and email on a string.
+ *
+ * @throws {Error} {status number}: {status text}
  */
-const usernameAndEmail = async () => {};
+
+const usernameAndEmail = async (id=1) => {
+  const responsePromise = await fetchUserById(id);
+  if (!responsePromise.ok) {
+    throw new Error(`${responsePromise.status}: ${responsePromise.statusText}`);
+  }
+  const user = await responsePromise.json();
+  return `${id}. ${user.username}, ${user.email}`;
+};
 
 describe("usernameAndEmail returns the user's id, name and email", () => {
   it("returns user 2's info", async () => {

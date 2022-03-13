@@ -6,17 +6,17 @@ const { log } = labeledLogger();
 
 let x = '';
 
-x += _;
+x += 'java';
 
 setTimeout(() => {
-  x += _;
+  x += 'r';
   log('cb 1:', x);
 }, 100);
 
-x += _;
+x += 's';
 
 setTimeout(() => {
-  x += _;
+  x += 'pt';
   log('cb 2:', x);
 }, 300);
 
@@ -27,11 +27,11 @@ setTimeout(() => {
 }, 500);
 
 setTimeout(() => {
-  x += _;
+  x += 'i';
   log('cb 4:', x);
 }, 200);
 
-x += _;
+x += 'c';
 
 log(x);
 
