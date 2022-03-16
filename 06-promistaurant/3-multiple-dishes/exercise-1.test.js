@@ -29,13 +29,41 @@ import {
  *  Complete the following code so that the test passes
  */
 
-const preparedExtras = _;
+const preparedExtras = Promise.all(
+  [
+    extras.egg,
+    extras.redPepper,
+    extras.onion,
+    extras.pineapple,
+    extras.bambooShoots,
+  ].map((e) => prepareExtra(e)),
+);
 
-const JoelPrep = _;
+const JoelPrep = preparePortion(sizes.small, bases.riceNoodles)
+  .then((meal) => addVegetables(meal))
+  .then((meal) => addTopping(meal, toppings.chicken))
+  .then((meal) => addSauce(meal, sauces.youWok));
 
-const kylePrep = _;
+const kylePrep = preparePortion(sizes.medium, bases.fineNoodles)
+  .then((meal) => addVegetables(meal))
+  .then((meal) => addTopping(meal, toppings.shrimps))
+  .then((meal) => addSauce(meal, sauces.soya));
 
-const theOrder = _;
+const theOrder = Promise.all([JoelPrep, kylePrep, preparedExtras])
+  .then(
+    ([
+      joelsMeal,
+      kylesMeal,
+      [egg, redPepper, onion, pineapple, bambooShoots],
+    ]) =>
+      Promise.all([
+        addPreparedExtras(joelsMeal, [egg, redPepper, onion]),
+        addPreparedExtras(kylesMeal, [pineapple, bambooShoots]),
+      ]),
+  )
+  .then(([joelsMeal, kylesMeal]) =>
+    Promise.all([bag(joelsMeal), bag(kylesMeal)]),
+  );
 
 theOrder
   .then(([joelsMeal, kylesMeal]) => {

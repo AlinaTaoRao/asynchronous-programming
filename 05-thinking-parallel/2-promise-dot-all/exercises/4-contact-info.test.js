@@ -4,6 +4,7 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
  *
  */
 const contactDetails = async (ids = []) => {
+  try {
   const responsePromises = [];
   ids.forEach((id) => responsePromises.push(fetchUserById(id)));
   const responses = await Promise.all(responsePromises);
@@ -18,6 +19,9 @@ const contactDetails = async (ids = []) => {
     (user) => `${user.id}. ${user.email}, ${user.phone}, ${user.website}`,
   );
   return details;
+} catch (err) {
+  throw new Error(err);
+}
 };
 
 // --- --- tests --- ---

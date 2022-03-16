@@ -3,6 +3,7 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 /**
  *
  */
+// way 1:
 const findGeoCoordinates = async (ids = []) => {
   // debugger;
   const responsePromises = [];
@@ -35,6 +36,42 @@ const findGeoCoordinates = async (ids = []) => {
   // way 5: copy an object using JSON
   return users.map(user => JSON.parse(JSON.stringify(user.address.geo)))
 };
+
+// way 2: --------- from aviv ----------
+/**
+ * Fetches users by their ids and returns their geo location coordinates
+ *
+ * @async
+ * @param {array} [ids = []] - The array of user ids to fetch.
+ * @returns {Promise<array>} - An array of objects for the user's longitude and latitude coordinates.
+ *
+ * @throws {Error} {status}: {text}
+ */
+
+//  const findGeoCoordinates = async (ids = []) => {
+//   const responsePromise = ids.map((id) => {
+//     return fetchUserById(id);
+//   });
+//   try {
+//     const responses = await Promise.all(responsePromise);
+//     for (const res of responses) {
+//       if (!res.ok) {
+//         throw new Error(`${res.status}: ${res.statusText}`);
+//       }
+//     }
+//     const usersPromise = responses.map((user) => {
+//       return user.json();
+//     });
+//     const users = await Promise.all(usersPromise);
+//     const userGeos = users.map((user) => {
+//       return { lat: user.address.geo.lat, lng: user.address.geo.lng };
+//     });
+//     return userGeos;
+//   } catch(error) {
+//     console.log(error);
+//     throw new Error(error);
+//   }
+// };
 
 // --- --- tests --- ---
 

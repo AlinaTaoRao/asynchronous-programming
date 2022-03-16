@@ -35,16 +35,21 @@ import {
  *  Complete the following code so that the test passes
  */
 
-const preparedExtras = Promise.all([
-  extras.egg,
-  extras.redPepper,
-  extras.onion,
-  extras.pineapple,
-  extras.egg,
-  extras.mushrooms,
-  extras.pineapple,
-  extras.broccoli,
-].map(e => prepareExtra(e)));
+// _;
+
+// const theOrder = _;
+const preparedExtras = Promise.all(
+  [
+    extras.egg,
+    extras.redPepper,
+    extras.onion,
+    extras.pineapple,
+    extras.egg,
+    extras.mushrooms,
+    extras.pineapple,
+    extras.broccoli,
+  ].map((e) => prepareExtra(e)),
+);
 const lindaPrep = preparePortion(sizes.small, bases.riceNoodles)
   .then((meal) => addVegetables(meal))
   .then((meal) => addTopping(meal, toppings.chicken))
@@ -57,7 +62,7 @@ const monicaPrep = preparePortion(sizes.medium, bases.whiteRice)
 
 const ninaPrep = preparePortion(sizes.large, bases.riceNoodles)
   .then((meal) => addVegetables(meal))
-  .then((meal) => addTopping(meal, toppings.calamari))
+  .then((meal) => addTopping(meal, toppings.shrimps))
   .then((meal) => addSauce(meal, sauces.sweetSour));
 
 const oliviaPrep = preparePortion(sizes.large, bases.riceNoodles)
@@ -70,16 +75,28 @@ const theOrder = Promise.all([
   monicaPrep,
   ninaPrep,
   oliviaPrep,
-  preparedExtras
+  preparedExtras,
 ])
-.then(([lM, mM, nM, oM, [e1, e2, e3, e4, e5, e6, e7, e8]]) =>
-  Promise.all([
-    addPreparedExtras(lM, [e1, e2, e3]),
-    addPreparedExtras(mM, [e4]),
-    addPreparedExtras(nM, []),
-    addPreparedExtras(oM, [e5, e6, e7, e8]),
-  ]))
-  .then(([lM, mM, nM, oM]) => Promise.all([bag(lM), bag(mM), bag(nM), bag(oM)]));
+  .then(
+    ([
+      lmeal,
+      mmeal,
+      nmeal,
+      omeal,
+      [egg, redPepper, onion, pineapple, egg2, mushrooms, pineapple2, broccoli],
+    ]) =>
+      Promise.all([
+        addPreparedExtras(lmeal, [egg, redPepper, onion]),
+        addPreparedExtras(mmeal, [pineapple]),
+        addPreparedExtras(nmeal, []),
+        addPreparedExtras(omeal, [egg2, mushrooms, pineapple2, broccoli]),
+      ]),
+  )
+  .then(([lmeal, mmeal, nmeal, omeal]) =>
+    Promise.all([bag(lmeal), bag(mmeal), bag(nmeal), bag(omeal)]),
+  );
+
+// 
 
 theOrder
   .then(([lindasMeal, monicasMeal, ninasMeal, oliviasMeal]) => {
@@ -160,8 +177,8 @@ theOrder
       it('should have sauce: sweet sour', () => {
         expect(ninasMeal.sauce).toEqual(sauces.sweetSour);
       });
-      it('should have topping: calamari', () => {
-        expect(ninasMeal.topping).toEqual(toppings.calamari);
+      it('should have topping: shrimps', () => {
+        expect(ninasMeal.topping).toEqual(toppings.shrimps);
       });
       describe('the meal should have 0 extras', () => {
         it('containing 0 items', () => {
