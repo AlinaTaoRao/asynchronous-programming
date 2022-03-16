@@ -12,7 +12,10 @@ import { ORIGIN } from '../config.js';
  */
 export const limitedResource = async (resourceType = '', limit = 1) => {
   // --- generate and declare your resource's URL ---
-  const URL = _;
+  // ORIGIN = 'https://jsonplaceholder.typicode.com';
+  const arr = [];
+  for(let i=1; i<=limit; i++){
+  const URL = `${ORIGIN}/${resourceType}/${i}`;
 
   // --- fetch the API data (this works!) ---
   const encodedURL = encodeURI(URL);
@@ -28,7 +31,10 @@ export const limitedResource = async (resourceType = '', limit = 1) => {
 
   /* --- parse the data if the response was ok (this works!) ---*/
   const data = await response.json();
-
+  // console.log("data: ", data);
+  arr.push(data);
+}
   // --- return the final data ---
-  return data;
+  // return data;
+  return arr;
 };

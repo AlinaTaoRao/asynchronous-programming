@@ -13,7 +13,9 @@ import { ORIGIN } from '../config.js';
 export const searchResources = async (resourceType = '', searchQuery = '') => {
   // --- declare your resource's URL ---
   // hint: https://github.com/typicode/json-server#full-text-search
-  const URL = _;
+  // ORIGIN = 'https://jsonplaceholder.typicode.com'
+  // /posts?q=internet
+  const URL = `${ORIGIN}/${resourceType}?q=${searchQuery}`;
 
   // --- fetch the API data (this works!) ---
   const encodedURL = encodeURI(URL);
@@ -29,6 +31,7 @@ export const searchResources = async (resourceType = '', searchQuery = '') => {
 
   /* --- parse the data if the response was ok (this works!) ---*/
   const data = await response.json();
+  console.log("data: ", data);
 
   // --- return the final data ---
   return data;
