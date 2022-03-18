@@ -1,4 +1,5 @@
 import { pokemonInOrder } from './pokemon-in-order.js';
+// import { pokemonInOrder } from './pokemon-in-order-2.js';
 
 describe('pokemonInOrder: returns a selected array of pokemon in order', () => {
   it('returns pokemon 11 -> 20', async () => {

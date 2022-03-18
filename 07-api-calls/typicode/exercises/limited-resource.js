@@ -10,12 +10,43 @@ import { ORIGIN } from '../config.js';
  *
  * @throws {Error} HTTP error! status: {number}.
  */
+ 
+// way 1: use for loop
+// export const limitedResource = async (resourceType = '', limit = 1) => {
+//   // --- generate and declare your resource's URL ---
+//   // ORIGIN = 'https://jsonplaceholder.typicode.com';
+//   const arr = [];
+//   for(let i=1; i<=limit; i++){
+//   const URL = `${ORIGIN}/${resourceType}/${i}`;
+
+//   // --- fetch the API data (this works!) ---
+//   const encodedURL = encodeURI(URL);
+//   const response = await fetch(encodedURL);
+
+//   // --- throw an error if the response is not ok (this works!) ---
+//   if (!response.ok) {
+//     const message = response.statusText
+//       ? `${response.status}: ${response.statusText}\n-> ${URL}`
+//       : `HTTP error! status: ${response.status}\n-> ${URL}`;
+//     throw new Error(message);
+//   }
+
+//   /* --- parse the data if the response was ok (this works!) ---*/
+//   const data = await response.json();
+//   // console.log("data: ", data);
+//   arr.push(data);
+// }
+//   // --- return the final data ---
+//   // return data;
+//   return arr;
+// };
+
+// way 2: use ?_limit
 export const limitedResource = async (resourceType = '', limit = 1) => {
   // --- generate and declare your resource's URL ---
   // ORIGIN = 'https://jsonplaceholder.typicode.com';
-  const arr = [];
-  for(let i=1; i<=limit; i++){
-  const URL = `${ORIGIN}/${resourceType}/${i}`;
+  
+  const URL = `${ORIGIN}/${resourceType}?_limit=${limit}`;
 
   // --- fetch the API data (this works!) ---
   const encodedURL = encodeURI(URL);
@@ -31,10 +62,8 @@ export const limitedResource = async (resourceType = '', limit = 1) => {
 
   /* --- parse the data if the response was ok (this works!) ---*/
   const data = await response.json();
-  // console.log("data: ", data);
-  arr.push(data);
-}
+
   // --- return the final data ---
-  // return data;
-  return arr;
+  return data;
+
 };

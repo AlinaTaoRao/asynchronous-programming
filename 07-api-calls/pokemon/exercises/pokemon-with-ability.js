@@ -35,8 +35,19 @@ export const pokemonWithAbility = async (ability = '') => {
   // --- process the fetched data (if necessary) ---
   //  you do not need to use `await` below this comment
   //  you can refactor this to a separate logic function and test it
+  // way 1: map
   const pokemon = data.pokemon.map( item => item.pokemon);
 
+  // way 2: for each
+  // const pokemon = [];
+  // data.pokemon.forEach(ele=> pokemon.push(ele.pokemon) );
+
+  // way 3: from aviv : for loop
+  // const pokemon = [];
+  // const iteration = Object.keys(data.pokemon);
+  // for (let i = 0; i < iteration.length; i++) {
+  //   pokemon.push(data.pokemon[i].pokemon);
+  // }
   // --- return the final data ---
   return pokemon;
 };

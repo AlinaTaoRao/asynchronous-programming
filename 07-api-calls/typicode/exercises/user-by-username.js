@@ -33,11 +33,19 @@ export const userByUsername = async (userName = '') => {
 
   // --- process the fetched data (if necessary) ---
   //   you do not need to use `await` below this comment
-  const user = data.filter(e => e.username = userName);
+  // way 1:
+  // const user = data.filter(e => e.username = userName);
 
   // --- return the final data ---
-  if (user.length === 0) {
+  // if (user.length === 0) {
+  //   return null;
+  // } 
+  // return user[0];
+
+  // way2:
+  const user = data[0];
+  if (data.length === 0) {
     return null;
-  } 
-  return user[0];
+  }
+  return user;
 };
