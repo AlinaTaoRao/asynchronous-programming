@@ -9,28 +9,27 @@ import { ORIGIN } from "../config.js";
  *
  * @throws {Error} HTTP error! status: {number}.
  */
-// ORIGIN = 'https://jsonplaceholder.typicode.com';
-// https://jsonplaceholder.typicode.com/posts/1
-// https://jsonplaceholder.typicode.com/posts/1/comments
 
 export const typicodeResource = async (...params) => {
-debugger;
+    //  set path URL
 const paramsPath = params.join('/');
 const URL = `${ORIGIN}/${paramsPath}`;
-console.log(URL);
+console.log("URL: ", URL);
 
+// fetch data from URL
+// way 1: ?
+// const response = await fetch(encodeURI(URL));
+// way 2:
+// const encodeURL = encodeURI(URL);
+// const response = await fetch(encodeURL);
 const encodedURL = encodeURI(URL);
 const response = await fetch(encodedURL);
 
-if (!response.ok) {
+if(!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}\n-> ${URL}`);
 }
 
-// way 1: const variable data to store return value
-// const data = await response.json();
-// return data;
-
-// way2: direct return
+// if data is ok , json data 
 return await response.json();
 
 };
