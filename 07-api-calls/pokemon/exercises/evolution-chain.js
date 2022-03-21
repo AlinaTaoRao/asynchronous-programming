@@ -56,7 +56,7 @@ export const evolutionChain = async (chainId = 1) => {
   // --- return the final data ---
   // return pokemon;
 
-  // way 2 : sander and aviv .length > 0
+  // way 2 : sander and aviv .length > 0 to replace recursion
 
   const pokemon = [];
   pokemon.push(data.chain.species);
