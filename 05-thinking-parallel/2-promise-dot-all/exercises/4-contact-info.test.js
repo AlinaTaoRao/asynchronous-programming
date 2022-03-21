@@ -3,25 +3,54 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 /**
  *
  */
+// way 1:
+// const contactDetails = async (ids = []) => {
+//   try {
+//   const responsePromises = [];
+//   ids.forEach((id) => responsePromises.push(fetchUserById(id)));
+//   const responses = await Promise.all(responsePromises);
+//   responses.forEach((res) => {
+//     if (!res.ok) {
+//       throw new Error(`${res.status}: ${res.statusText}`);
+//     }
+//   });
+//   const userPromises = responses.map((res) => res.json());
+//   const users = await Promise.all(userPromises);
+//   const details = users.map(
+//     (user) => `${user.id}. ${user.email}, ${user.phone}, ${user.website}`,
+//   );
+//   return details;
+// } catch (err) {
+//   throw new Error(err);
+// }
+// };
+
+// way 2: most efficient way user promise.all(xx.map(async() => await))
+/* 
+const responsePromise
+const response
+return promise.all(response.map(async (res) => {
+  // if !res.ok
+  // await res.json()}))
+*/
+
 const contactDetails = async (ids = []) => {
   try {
-  const responsePromises = [];
-  ids.forEach((id) => responsePromises.push(fetchUserById(id)));
-  const responses = await Promise.all(responsePromises);
-  responses.forEach((res) => {
-    if (!res.ok) {
-      throw new Error(`${res.status}: ${res.statusText}`);
-    }
-  });
-  const userPromises = responses.map((res) => res.json());
-  const users = await Promise.all(userPromises);
-  const details = users.map(
-    (user) => `${user.id}. ${user.email}, ${user.phone}, ${user.website}`,
-  );
-  return details;
-} catch (err) {
-  throw new Error(err);
-}
+    const responsePromises = ids.map((id) => fetchUserById(id));
+    const response = await Promise.all(responsePromises);
+
+    return Promise.all(
+      response.map(async (res) => {
+        if (!res.ok) {
+          throw new Error(`${res.status}: ${res.statusText}`);
+        }
+        const user = await res.json();
+        return `${user.id}. ${user.email}, ${user.phone}, ${user.website}`;
+      }),
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 // --- --- tests --- ---
