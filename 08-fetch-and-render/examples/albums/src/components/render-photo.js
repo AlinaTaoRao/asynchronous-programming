@@ -1,8 +1,8 @@
 /**
- * Document me!
+ * Create DOM element to store the info from photo, render component on ui.
  *
- * @param {_} photo
- * @returns
+ * @param {object} [photo={}] - A photo which attached to the album.
+ * @returns {DOM element} - A div element to store the info of a photo.
  */
 export const renderPhoto = (photo = {}) => {
   const container = document.createElement('div');

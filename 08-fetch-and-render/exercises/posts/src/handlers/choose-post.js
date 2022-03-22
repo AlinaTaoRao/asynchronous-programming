@@ -4,6 +4,12 @@ import { renderPost } from "../components/render-post.js";
 import { fourOhFour } from '../components/four-oh-four.js';
 import { otherError } from '../components/other-error.js';
 
+/**
+ * Handle the click event and render component to ui.
+ * 
+ * @param {event} [event] - The "click" event witch will trigger this handler.
+ */
+
 // ORIGIN = 'https://jsonplaceholder.typicode.com';
 // https://jsonplaceholder.typicode.com/posts/1
 // https://jsonplaceholder.typicode.com/posts/1/comments

@@ -1,5 +1,8 @@
 /**
+ * Generate a error message for 404 error, and then render component to ui.
  * 
+ * @param {number} [id=1] - The post id that user input.
+ * @return {DOM element} - A div element witch stores the error message.
  */
 
 export const fourOhFour = (id = 1) => {

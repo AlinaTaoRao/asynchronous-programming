@@ -3,7 +3,7 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 /**
  *
  */
-// way 1:
+// way 1: process data in group way step by step
 // const contactDetails = async (ids = []) => {
 //   try {
 //   const responsePromises = [];
@@ -25,7 +25,8 @@ import { fetchUserById } from '../../../lib/fetch-user-by-id/index.js';
 // }
 // };
 
-// way 2: most efficient way user promise.all(xx.map(async() => await))
+// way 2: most efficient way from Sander. Process data in single way step by step.
+// user promise.all(xx.map(async() => await))
 /* 
 const responsePromise
 const response
@@ -33,7 +34,6 @@ return promise.all(response.map(async (res) => {
   // if !res.ok
   // await res.json()}))
 */
-
 const contactDetails = async (ids = []) => {
   try {
     const responsePromises = ids.map((id) => fetchUserById(id));

@@ -14,6 +14,25 @@
     </form>
     <div id="root"></div>
 
+    <!-- template section start -->
+    <template id="post-template"> // var template = document.querySelector("#singleBook")
+      <div id="post-temp"> //id = "post-2" // #post-template.children[0],
+        <h1></h1> // .title
+        <code>posted by user: </code> //"posted by user: " +userId
+        <p></p> //.body
+        <div id="comments"> //id= "comments"
+          <!-- single comment start -->
+          <div id="comments-temp" class="comment"> //id = "comments-.6"  class = "comment"
+            <h2></h2> //.name
+            <code>comment by: </code> //"comment by: " .email
+            <p></p> //.body
+          </div> 
+          <!-- single comment end -->
+        </div> 
+      </div>
+    </template>
+    <!-- template section end -->
+
     <script type="module" src="./src/init.js"></script>
   </body>
 </html>
