@@ -10,7 +10,7 @@ export const setItemHandler = async (event) => {
     // fetch data from wiki api, and then json data
     const data = await wikiResource(itemToSearch);
 
-    // render component to ui
+    // render all component to ui
     data.query.search.forEach((item) => renderItem(item));
   } catch (err) {
     console.error(err);
