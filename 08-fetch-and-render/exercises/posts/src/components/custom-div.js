@@ -69,19 +69,10 @@ export class MyDivForPost extends HTMLElement {
       postDiv.children[3].appendChild(dupCommentTemplate);
     });
 
-    // // remove the temp div element with id "comment-temp";
-    // try 1: Use remove() method, not work
-    // const toRemoveNode = document.getElementById("comment-temp");
-    // toRemoveNode.remove(); // Cannot read properties of null (reading 'remove')
-
-    //  try 2: removeChild() method, not work
-    // const pNode = document.getElementById("comments");
-    // pNode.removeChild(pNode.firstElementChild); // TypeError: Cannot read properties of null (reading 'removeChild')
-
-    // try 3: parentNode //not work. Uncaught TypeError: Cannot read properties of null (reading 'parentNode')
-//    const toRemoveNode = document.getElementById("comment-temp");
-//    toRemoveNode.parentNode.removeChild(toRemoveNode); 
-   
+    // remove the temp div element with id "comment-temp", commentTemplate;
+    // hint: can't use document.getElementById("comment-temp") to get element in shadow root.
+    // try 1: get element by children[]. Use .remove() method,/.removeChild()/ .parentNode method  //works
+    commentTemplate.remove(); //works
 
     //  create style
     const style = document.createElement('style');
