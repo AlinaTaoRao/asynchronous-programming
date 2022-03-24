@@ -48,7 +48,7 @@ export class PostComment extends HTMLElement {
 
    //  get root element and clear root content
     const root = document.getElementById('root');
-    root.innerText = '';
+    root.innerHTML = '';
   
 
     // Create a shadow root
