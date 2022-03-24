@@ -126,8 +126,8 @@ describe('limitedResource: fetches a limited number of a specific resource type'
       },
     ]);
   });
-  it('should fetch 15 users', async () => {
-    const actual = await limitedResource('users', 15);
+  it('should fetch 10 users', async () => {
+    const actual = await limitedResource('users', 10);
     expect(actual).toEqual([
       {
         address: {

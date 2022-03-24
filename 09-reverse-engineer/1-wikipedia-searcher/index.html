@@ -12,6 +12,7 @@
     <title>Wikipedia Searcher</title>
   </head>
   <body>
+    <!-- wrapper start -->
     <div class="wrapper">
       <div class="header">
         <img class="image" src="./assets/wikipedia-logotype.png" />
@@ -19,7 +20,7 @@
       </div>
       <div class="app">
         <section id="search-box">
-          <input type="text" class="input-field" />
+          <input type="text" class="input-field" name="keyword"/>
           <button class="btn" id="submit-btn" type="submit">Search</button>
         </section>
         <div id="#error"></div>
@@ -29,6 +30,21 @@
         <p>Wikipedia Search © raihanalam</p>
       </div>
     </div>
+    <!-- wrapper end -->
+    <!-- template start -->
+    <template id = "my-output-div">
+      <div class="row">
+        <h3>
+          <a href=""></a> 
+        </h3>
+        <p>
+        </p>
+        <a href=""> 
+          <button>View Full Article</button> 
+        </a>
+      </div>
+    </template>
+    <!-- template end -->
     <script type="module" src="./src/init.js"></script>
   </body>
 </html>

@@ -35,9 +35,51 @@ import {
  *  Complete the following code so that the test passes
  */
 
-_;
+const preparedExtras = Promise.all([
+  extras.egg,
+  extras.redPepper,
+  extras.onion,
+  extras.pineapple,
+  extras.egg,
+  extras.mushrooms,
+  extras.pineapple,
+  extras.broccoli,
+].map(e => prepareExtra(e)));
+const lindaPrep = preparePortion(sizes.small, bases.riceNoodles)
+  .then((meal) => addVegetables(meal))
+  .then((meal) => addTopping(meal, toppings.chicken))
+  .then((meal) => addSauce(meal, sauces.youWok));
 
-const theOrder = _;
+const monicaPrep = preparePortion(sizes.medium, bases.whiteRice)
+  .then((meal) => addVegetables(meal))
+  .then((meal) => addTopping(meal, toppings.shrimps))
+  .then((meal) => addSauce(meal, sauces.soya));
+
+const ninaPrep = preparePortion(sizes.large, bases.riceNoodles)
+  .then((meal) => addVegetables(meal))
+  .then((meal) => addTopping(meal, toppings.calamari))
+  .then((meal) => addSauce(meal, sauces.sweetSour));
+
+const oliviaPrep = preparePortion(sizes.large, bases.riceNoodles)
+  .then((meal) => addVegetables(meal))
+  .then((meal) => addTopping(meal, toppings.calamari))
+  .then((meal) => addSauce(meal, sauces.thai));
+
+const theOrder = Promise.all([
+  lindaPrep,
+  monicaPrep,
+  ninaPrep,
+  oliviaPrep,
+  preparedExtras
+])
+.then(([lM, mM, nM, oM, [e1, e2, e3, e4, e5, e6, e7, e8]]) =>
+  Promise.all([
+    addPreparedExtras(lM, [e1, e2, e3]),
+    addPreparedExtras(mM, [e4]),
+    addPreparedExtras(nM, []),
+    addPreparedExtras(oM, [e5, e6, e7, e8]),
+  ]))
+  .then(([lM, mM, nM, oM]) => Promise.all([bag(lM), bag(mM), bag(nM), bag(oM)]));
 
 theOrder
   .then(([lindasMeal, monicasMeal, ninasMeal, oliviasMeal]) => {
@@ -61,16 +103,16 @@ theOrder
       });
       describe('the meal should have 3 extras', () => {
         it('containing 3 items', () => {
-          expect(joelsMeal.extras.length).toEqual(3);
+          expect(lindasMeal.extras.length).toEqual(3);
         });
         it('includes: egg', () => {
-          expect(joelsMeal.extras.includes(extras.egg)).toEqual(true);
+          expect(lindasMeal.extras.includes(extras.egg)).toEqual(true);
         });
         it('includes: onion', () => {
-          expect(joelsMeal.extras.includes(extras.onion)).toEqual(true);
+          expect(lindasMeal.extras.includes(extras.onion)).toEqual(true);
         });
         it('includes: red peppers', () => {
-          expect(joelsMeal.extras.includes(extras.redPepper)).toEqual(true);
+          expect(lindasMeal.extras.includes(extras.redPepper)).toEqual(true);
         });
       });
     });
@@ -118,8 +160,8 @@ theOrder
       it('should have sauce: sweet sour', () => {
         expect(ninasMeal.sauce).toEqual(sauces.sweetSour);
       });
-      it('should have topping: shrimps', () => {
-        expect(ninasMeal.topping).toEqual(toppings.shrimps);
+      it('should have topping: calamari', () => {
+        expect(ninasMeal.topping).toEqual(toppings.calamari);
       });
       describe('the meal should have 0 extras', () => {
         it('containing 0 items', () => {
@@ -157,7 +199,7 @@ theOrder
           expect(oliviasMeal.extras.includes(extras.mushrooms)).toEqual(true);
         });
         it('includes: eggs', () => {
-          expect(oliviasMeal.extras.includes(extras.eggs)).toEqual(true);
+          expect(oliviasMeal.extras.includes(extras.egg)).toEqual(true);
         });
         it('includes: broccoli', () => {
           expect(oliviasMeal.extras.includes(extras.broccoli)).toEqual(true);

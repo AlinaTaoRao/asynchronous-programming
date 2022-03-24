@@ -21,7 +21,7 @@
         <h3><i class="fab fa-github-alt"></i> GitHub Finder</h3>
       </div>
     </nav>
-    <div class="container searchContainer">
+    <div class="container searchContainer" id="search-container">
       <br />
       <div class="search card text-center">
         <div class="card-header"></div>
@@ -42,11 +42,42 @@
       </div>
       <div id="profile"></div>
     </div>
+    <!-- template start -->
+    <template id="my-profile-div">
+      <div class="card card-body mb-3">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="" alt="" class="img-fluid mb-2"> <!-- <img class="img-fluid mb-2" src="https://avatars.githubusercontent.com/u/88941807?v=4"> -->
+            <a href="" class="btn btn-primary btn-block mb-4">View profile</a>
+          </div>
+          <div class="col-md-9">
+            <h3></h3>
+            <small></small>
+            <br>
+            <br>
+            <span class="badge bg-primary"></span>
+            <span class="badge bg-secondary"></span>
+            <span class="badge bg-success"></span>
+            <span class="badge bg-info"></span>
+            <br>
+            <br>
+            <ul class="list-group">
+              <li class="list-group-item"></li>
+              <li class="list-group-item"></li>
+              <li class="list-group-item"></li>
+              <li class="list-group-item"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- template end-->
     <footer class="mg p-3 text-center bg-light-green">Github Finder ©</footer>
 
     <script src="./lib/popper.min.js"></script>
     <script src="./lib/bootstrap.min.js"></script>
 
-    <script type="module" src="./src/init.j"></script>
+    <script type="module" src="./src/init.js"></script>
   </body>
 </html>

@@ -12,7 +12,9 @@ import { ORIGIN } from '../config.js';
 export const pokemonWithAbility = async (ability = '') => {
   // --- generate and declare your resource's URL ---
   // docs: https://pokeapi.co/docs/v2#abilities
-  const URL = _;
+  // ORIGIN = 'https://pokeapi.co/api/v2'
+  // real: https://pokeapi.co/api/v2/ability/drizzle/
+  const URL = `${ORIGIN}/ability/${ability}`;
 
   // --- fetch the API data (this works!) ---
   const encodedURL = encodeURI(URL);
@@ -28,12 +30,24 @@ export const pokemonWithAbility = async (ability = '') => {
 
   /* --- parse the data if the response was ok (this works!) ---*/
   const data = await response.json();
+  console.log("data: ", data);
 
   // --- process the fetched data (if necessary) ---
   //  you do not need to use `await` below this comment
   //  you can refactor this to a separate logic function and test it
-  const pokemon = _;
+  // way 1: map
+  const pokemon = data.pokemon.map( item => item.pokemon);
 
+  // way 2: for each
+  // const pokemon = [];
+  // data.pokemon.forEach(ele=> pokemon.push(ele.pokemon) );
+
+  // way 3: from aviv : for loop
+  // const pokemon = [];
+  // const iteration = Object.keys(data.pokemon);
+  // for (let i = 0; i < iteration.length; i++) {
+  //   pokemon.push(data.pokemon[i].pokemon);
+  // }
   // --- return the final data ---
   return pokemon;
 };

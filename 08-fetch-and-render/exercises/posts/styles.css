@@ -1,3 +1,7 @@
 .comment {
   border-top: solid black 1px;
 }
+
+p br {
+  display: none;
+}

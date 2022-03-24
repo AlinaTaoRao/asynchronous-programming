@@ -1,0 +1,54 @@
+<z-button data-text="button"></z-button>
+<template id="z-button">
+  <style>
+    .z-button {
+      display: inline-block;
+      line-height: 20px;
+      border-radius: 4px;
+      padding: 9px 15px;
+      min-width: 50px;
+      cursor: pointer;
+      color:#fff;
+      background-color: #2486ff;
+      border:1px solid #2486ff;
+    }
+  </style>   
+  <button class="z-button" />
+</template>
+
+<script>
+  class Zbutton extends HTMLElement {
+    constructor() {
+      debugger;
+    super();
+    const shadow = this.attachShadow({ mode: "open" });
+    console.log(this)
+    const template = document.querySelector("#z-button");
+    const btn = template.content.querySelector("button");
+    btn.textContent = this.getAttribute("data-text");
+    const templateContent = template.content.cloneNode(true);
+    const style = document.createElement("style");
+    style.textContent = `
+    .z-button {
+      display: inline-block;
+      line-height: 20px;
+      border-radius: 4px;
+      padding: 9px 15px;
+      min-width: 50px;
+      cursor: pointer;
+      color:#fff;
+      background-color: #2486ff;
+      border:1px solid #2486ff;
+    }
+    `;
+    shadow.appendChild(style);
+    shadow.appendChild(templateContent);
+
+    tmp = document.getElementById('z-button');
+    console.log(tmp)
+
+    }
+  }
+
+  customElements.define("z-button", Zbutton);
+</script>
