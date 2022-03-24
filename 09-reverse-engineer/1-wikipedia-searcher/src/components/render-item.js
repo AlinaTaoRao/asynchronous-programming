@@ -5,7 +5,7 @@ import { WIKI } from '../config.js';
  *
  * @param {object} [item = {}] - The data object to render.
  */
-// way 1: render component using .creatElement()
+// way 1: render component using .creatElement(). works
 // export const renderItem = (item= {}) => {
 //     // debugger;
 //     // create container
@@ -43,7 +43,7 @@ import { WIKI } from '../config.js';
 
 // };
 
-// way 2: render component using .innerHTML
+// way 2: render component using .innerHTML. Template literals. works.
 export const renderItem = (item = {}) => {
   //   debugger;
 
@@ -52,21 +52,25 @@ export const renderItem = (item = {}) => {
   container.className = 'row';
 
   // define the link url
-  const joinedPath = item.title.split(' ').join('%20');
-  const URL = `${WIKI}/${joinedPath}`;
+  // way 1: use .split() and join(). works
+  // const joinedPath = item.title.split(' ').join('%20');
+  // const URL = `${WIKI}/${joinedPath}`;
 
-  //   assign content to container
+  // way 2: use encodeURI(). works
+  const URL = encodeURI(`${WIKI}/${item.title}`);
+
+  // assign content to container
   container.innerHTML = `
-<h3>
-  <a href= ${URL}>${item.title}</a> 
-</h3>
-<p>
-${item.snippet}
-</p>
-<a href= ${URL}> 
-  <button>View Full Article</button> 
-</a>
-`;
+  <h3>
+    <a href= ${URL}>${item.title}</a> 
+  </h3>
+  <p>
+  ${item.snippet}
+  </p>
+  <a href= ${URL}> 
+    <button>View Full Article</button> 
+  </a>
+  `;
 
   // append container to output
   document.getElementById('output').appendChild(container);
